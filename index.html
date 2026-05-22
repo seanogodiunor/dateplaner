@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script type="text/javascript">
+    (function(){
+        emailjs.init("JeJ8h4_1I3ThKd6-9"); // Replace with your actual EmailJS Public Key
+    })();
+  </script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Saturday Plans ✨</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background: #0f0f13;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at top, rgba(236,72,153,0.25), transparent 40%);
+      z-index: -1;
+    }
+
+    .container {
+      max-width: 430px;
+      margin: auto;
+      min-height: 100vh;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .topbar {
+      margin-bottom: 30px;
+    }
+
+    .topbar-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      align-items: center;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.8);
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .progress {
+      height: 10px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 30px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 20%;
+      background: linear-gradient(to right, #ec4899, #fb7185);
+      transition: 0.4s;
+    }
+
+    .screen {
+      display: none;
+      flex: 1;
+      animation: fade 0.5s ease;
+    }
+
+    .screen.active {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    @keyframes fade {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h1, h2 {
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-size: 52px;
+    }
+
+    h2 {
+      font-size: 42px;
+    }
+
+    p {
+      color: rgba(255,255,255,0.7);
+      line-height: 1.7;
+      font-size: 18px;
+    }
+
+    .hero-icon {
+      width: 85px;
+      height: 85px;
+      border-radius: 28px;
+      background: linear-gradient(135deg, #ec4899, #fb7185);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      margin-bottom: 35px;
+      box-shadow: 0 20px 50px rgba(236,72,153,0.35);
+    }
+
+    button {
+      border: none;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .primary-btn {
+      margin-top: 40px;
+      width: 100%;
+      padding: 18px;
+      border-radius: 22px;
+      background: linear-gradient(to right, #ec4899, #fb7185);
+      color: white;
+      font-size: 18px;
+      font-weight: 700;
+      box-shadow: 0 20px 40px rgba(236,72,153,0.2);
+    }
+
+    .primary-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .input-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 22px;
+      border-radius: 28px;
+      margin-bottom: 20px;
+    }
+
+    .input-card label {
+      display: block;
+      margin-bottom: 10px;
+      color: rgba(255,255,255,0.6);
+      font-size: 14px;
+    }
+
+    .input-card input {
+      width: 100%;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: white;
+      font-size: 22px;
+    }
+
+    .card-container {
+      margin-top: 20px;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .activity-card {
+      width: 100%;
+      height: 520px;
+      border-radius: 40px;
+      overflow: hidden;
+      position: relative;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.4);
+      background-size: cover !important;
+      background-position: center !important;
+    }
+
+    .activity-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .badge {
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(10px);
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .icon-box {
+      width: 60px;
+      height: 60px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+    }
+
+    .activity-card h3 {
+      font-size: 42px;
+      font-weight: 900;
+      margin-bottom: 18px;
+    }
+
+    .swipe-buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin-top: 25px;
+    }
+
+    .secondary-btn {
+      padding: 18px;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.7);
+      font-weight: 700;
+      font-size: 16px;
+    }
+
+    .summary-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 28px;
+      padding: 24px;
+      margin-bottom: 18px;
+    }
+
+    .summary-card h4 {
+      margin-bottom: 10px;
+      font-size: 22px;
+    }
+
+    .confirmation {
+      text-align: center;
+      align-items: center;
+    }
+
+    .confirm-icon {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ec4899, #fb7185);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 50px;
+      margin-bottom: 35px;
+      box-shadow: 0 20px 60px rgba(236,72,153,0.4);
+    }
+
+    .confetti {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      background: #ec4899;
+      top: -10px;
+      animation: fall linear forwards;
+      z-index: 999;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="topbar">
+      <div class="topbar-row">
+        <div class="brand">💖 Saturday Plans</div>
+        <span id="stepText">Step 1 / 5</span>
+      </div>
+
+      <div class="progress">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+    </div>
+
+    <section class="screen active" id="screen0">
+      <div class="hero-icon">✨</div>
+
+      <h1>
+        Hey,<br>
+        beautiful ✨
+      </h1>
+
+      <p>
+        Since we couldn't decide what to do on Saturday...<br>
+        I made something fun instead.
+      </p>
+
+      <button class="primary-btn" onclick="nextScreen()">
+        Continue →
+      </button>
+    </section>
+
+    <section class="screen" id="screen1">
+      <h2>
+        Pick the<br>
+        perfect time 💫
+      </h2>
+
+      <p style="margin-bottom: 35px;">
+        Choose when you'd like us to go out.
+      </p>
+
+      <div class="input-card">
+        <label>Select Date</label>
+        <input type="date" id="dateInput">
+      </div>
+
+      <div class="input-card">
+        <label>Select Time</label>
+        <input type="time" id="timeInput">
+      </div>
+
+      <button class="primary-btn" onclick="validateDateTime()">
+        Continue
+      </button>
+    </section>
+
+    <section class="screen" id="screen2">
+      <div>
+        <h2>
+          Swipe your<br>
+          favorite vibes 💕
+        </h2>
+
+        <p>
+          Tap confirm to select the date idea you love.
+        </p>
+      </div>
+
+      <div class="card-container">
+        <div class="activity-card" id="activityCard">
+          <div class="activity-top">
+            <span class="badge" id="activityVibe"></span>
+            <div class="icon-box" id="activityIcon"></div>
+          </div>
+
+          <div>
+            <h3 id="activityTitle"></h3>
+            <p id="activityDescription"></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="swipe-buttons">
+        <button class="secondary-btn" onclick="swipeLeft()">
+          Next
+        </button>
+
+        <button class="primary-btn" style="margin-top:0;" onclick="swipeRight()">
+          Confirm 💖
+        </button>
+      </div>
+    </section>
+
+    <section class="screen" id="screen3">
+      <div>
+        <h2>
+          Our little<br>
+          plan together 🥂
+        </h2>
+
+        <p style="margin-bottom: 30px;">
+          Here's everything you picked.
+        </p>
+      </div>
+
+      <div id="summaryContainer"></div>
+
+      <button class="primary-btn" onclick="sendPlans()">
+        Send To Sean ✨
+      </button>
+    </section>
+
+    <section class="screen confirmation" id="screen4">
+      <div class="confirm-icon">🎉</div>
+
+      <h2>
+        It's a date ✨
+      </h2>
+
+      <p>
+        Your selections have officially been sent.<br>
+        Saturday is going to be amazing.
+      </p>
+    </section>
+  </div>
+
+
+  <script>
+  let currentScreen = 0;
+  let currentActivity = 0;
+
+  const selectedActivities = [];
+
+  const activities = [
+  {
+    title: 'Rooftop Dinner',
+    description: 'Dress up a little, good food, city lights, and long conversations.',
+    vibe: 'Romantic',
+    icon: '🍽️',
+    image: 'https://images.unsplash.com/photo-1533777857889-4be7c70b33f7?q=80&w=600&auto=format&fit=crop',
+    gradient: 'linear-gradient(135deg, rgba(236,72,153,0.85), rgba(254,113,133,0.85))'
+  },
+  {
+    title: 'Late Night Coffee',
+    description: 'A cozy coffee shop with music and endless conversations.',
+    vibe: 'Chill',
+    icon: '☕',
+    image: 'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?q=80&w=600&auto=format&fit=crop',
+    gradient: 'linear-gradient(135deg, rgba(217,119,6,0.85), rgba(253,186,116,0.85))'
+  },
+  {
+    title: 'Live Music',
+    description: 'Good music, dancing, and unforgettable energy.',
+    vibe: 'Fun',
+    icon: '🎵',
+    image: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=600&auto=format&fit=crop',
+    gradient: 'linear-gradient(135deg, rgba(139,92,246,0.85), rgba(236,72,153,0.85))'
+  },
+  {
+    title: 'Sunset Walk',
+    description: 'Relaxed walk, beautiful views, and genuine moments.',
+    vibe: 'Peaceful',
+    icon: '🌅',
+    image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=600&auto=format&fit=crop',
+    gradient: 'linear-gradient(135deg, rgba(14,165,233,0.85), rgba(103,232,249,0.85))'
+  },
+  {
+    title: 'Movie Night',
+    description: 'Cinema snacks, funny reactions, and cuddly vibes.',
+    vibe: 'Cute',
+    icon: '🎬',
+    image: 'https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?q=80&w=600&auto=format&fit=crop',
+    gradient: 'linear-gradient(135deg, rgba(51,65,85,0.85), rgba(100,116,139,0.85))'
+  }
+];
+
+  
+
+  function validateDateTime() {
+    const date = document.getElementById('dateInput').value;
+    const time = document.getElementById('timeInput').value;
+
+    if(!date || !time) {
+      alert('Please select both a date and time ✨');
+      return;
+    }
+
+    const selectedDateTime = new Date(`${date}T${time}`);
+    const now = new Date();
+
+    if(selectedDateTime <= now) {
+      alert('Please choose a future date and time 💕');
+      return;
+    }
+
+    nextScreen();
+  }
+
+  function nextScreen() {
+    document.getElementById(`screen${currentScreen}`).classList.remove('active');
+    currentScreen++;
+    document.getElementById(`screen${currentScreen}`).classList.add('active');
+
+    updateProgress();
+
+    if(currentScreen === 2) {
+      renderActivity();
+    }
+
+    if(currentScreen === 3) {
+      renderSummary();
+    }
+  }
+
+  function updateProgress() {
+    document.getElementById('stepText').innerText = `Step ${currentScreen + 1} / 5`;
+    document.getElementById('progressFill').style.width = `${((currentScreen + 1) / 5) * 100}%`;
+  }
+
+  
+  function renderActivity() {
+    const activity = activities[currentActivity];
+
+    // Combines your color gradient overlay on top of the background image gracefully
+    document.getElementById('activityCard').style.background = `linear-gradient(180deg, rgba(15,15,19,0.2) 0%, rgba(15,15,19,0.85) 100%), url('${activity.image}')`;
+    
+    document.getElementById('activityTitle').innerText = activity.title;
+    document.getElementById('activityDescription').innerText = activity.description;
+    document.getElementById('activityVibe').innerText = activity.vibe;
+    document.getElementById('activityIcon').innerText = activity.icon;
+  }
+
+    // Next Button: Cycles through the cards and loops back to the start infinitely
+   function swipeLeft() {
+    currentActivity++;
+
+    // If we've reached the end of the list, loop back to the first card
+    if (currentActivity >= activities.length) {
+      currentActivity = 0;
+    }
+    
+    renderActivity();
+  }
+
+  // Confirm Button: Locks in the choice and moves straight to the final summary
+  function swipeRight() {
+    const currentSelection = activities[currentActivity];
+
+    // Clear any previous selection ensuring only their final confirmed choice shows up
+    selectedActivities.length = 0; 
+    selectedActivities.push(currentSelection);
+
+    // Skip the rest of the cards and go straight to Step 4 (The Summary Screen)
+    nextScreen();
+  }
+
+  function renderSummary() {
+    const summary = document.getElementById('summaryContainer');
+
+    const date = document.getElementById('dateInput').value;
+    const time = document.getElementById('timeInput').value;
+
+    // Optional: Format the date beautifully for display instead of YYYY-MM-DD
+    const dateObj = new Date(`${date}T00:00:00`);
+    const formattedDate = dateObj.toLocaleDateString('en-US', { 
+      weekday: 'long', 
+      month: 'short', 
+      day: 'numeric' 
+    });
+
+    summary.innerHTML = `
+      <div class="summary-card">
+        <h4>📅 Date & Time</h4>
+        <p>${formattedDate} at ${time}</p>
+      </div>
+    `;
+
+    if(selectedActivities.length === 0) {
+      summary.innerHTML += `
+        <div class="summary-card">
+          <h4>No date idea selected yet 💔</h4>
+          <p>You skipped all the activities.</p>
+        </div>
+      `;
+      return;
+    }
+
+    selectedActivities.forEach(activity => {
+      summary.innerHTML += `
+        <div class="summary-card">
+          <h4>${activity.icon} ${activity.title}</h4>
+          <p>${activity.description}</p>
+        </div>
+      `;
+    });
+  }
+
+  function sendPlans() {
+    const date = document.getElementById('dateInput').value;
+    const time = document.getElementById('timeInput').value;
+    const choice = selectedActivities[0] ? `${selectedActivities[0].icon} ${selectedActivities[0].title}` : "None";
+
+    const templateParams = {
+      to_email: 'priiffiizzy@googlemail.com',
+      date_time: `${date} at ${time}`,
+      selected_vibe: choice
+    };
+
+    // Triggers confetti right away for UI responsiveness
+    launchConfetti();
+
+    emailjs.send('service_5ws3wyx', 'template_awph56x', templateParams)
+      .then(() => {
+        nextScreen();
+      }, (error) => {
+        console.log('Failed to deliver email...', error);
+        // Fallback transition if the network block happens
+        nextScreen();
+      });
+  }
+
+  function launchConfetti() {
+    for(let i = 0; i < 80; i++) {
+      const confetti = document.createElement('div');
+      confetti.classList.add('confetti');
+
+      confetti.style.left = Math.random() * window.innerWidth + 'px';
+      confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+      confetti.style.background = `hsl(${Math.random() * 360}, 100%, 60%)`;
+
+      document.body.appendChild(confetti);
+
+      setTimeout(() => {
+        confetti.remove();
+      }, 5000);
+    }
+  }
+</script>
+
+
+
+
+
+</body>
+</html>
