@@ -606,28 +606,39 @@
   }
 
   function sendPlans() {
-    const date = document.getElementById('dateInput').value;
-    const time = document.getElementById('timeInput').value;
-    const choice = selectedActivities[0] ? `${selectedActivities[0].icon} ${selectedActivities[0].title}` : "None";
+  const date = document.getElementById('dateInput').value;
+  const time = document.getElementById('timeInput').value;
 
-    const templateParams = {
-      to_email: 'priiffiizzy@googlemail.com',
-      date_time: `${date} at ${time}`,
-      selected_vibe: choice
-    };
+  const choice = selectedActivities[0]
+    ? `${selectedActivities[0].icon} ${selectedActivities[0].title}`
+    : "None";
 
-    // Triggers confetti right away for UI responsiveness
-    launchConfetti();
+  const templateParams = {
+    to_email: 'priiffiizzy@googlemail.com',
+    date_time: `${date} at ${time}`,
+    selected_vibe: choice
+  };
 
-    emailjs.send('service_5ws3wyx', 'template_awph56x', templateParams)
-      .then(() => {
-        nextScreen();
-      }, (error) => {
-        console.log('Failed to deliver email...', error);
-        // Fallback transition if the network block happens
-        nextScreen();
-      });
-  }
+  launchConfetti();
+
+  emailjs.send(
+    'service_5ws3wyx',
+    'template_awph56x',
+    templateParams
+  )
+  .then((response) => {
+    console.log('SUCCESS!', response);
+    nextScreen();
+  })
+  .catch((error) => {
+    console.error('FAILED...', error);
+
+    alert(`
+      Email failed to send.
+      Check console logs.
+    `);
+  });
+}
 
   function launchConfetti() {
     for(let i = 0; i < 80; i++) {
