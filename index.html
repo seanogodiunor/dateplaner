@@ -2,14 +2,6 @@
 <html lang="en">
 <head>
 
-
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-  <script type="text/javascript">
-    (function(){
-        emailjs.init("JeJ8h4_1I3ThKd6-9"); // Replace with your actual EmailJS Public Key
-    })();
-  </script>
-
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Saturday Plans ✨</title>
@@ -605,40 +597,53 @@
     });
   }
 
+
+
   function sendPlans() {
-  const date = document.getElementById('dateInput').value;
-  const time = document.getElementById('timeInput').value;
+    const date = document.getElementById('dateInput').value;
+    const time = document.getElementById('timeInput').value;
 
-  const choice = selectedActivities[0]
-    ? `${selectedActivities[0].icon} ${selectedActivities[0].title}`
-    : "None";
+    const choice = selectedActivities[0]
+      ? `${selectedActivities[0].icon} ${selectedActivities[0].title}`
+      : "None";
 
-  const templateParams = {
-    to_email: 'kellsphotmail@yahoo.de',
-    date_time: `${date} at ${time}`,
-    selected_vibe: choice
-  };
+    // Launch confetti instantly
+    
 
-  launchConfetti();
+    fetch("https://formsubmit.co/ajax/kellsphotmail@yahoo.de", {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        subject: "Saturday Plans ✨",
+        message: `
+      💖 New Saturday Plan
 
-  emailjs.send(
-    'service_n9y4oh8',
-    'template_awph56x',
-    templateParams
-  )
-  .then((response) => {
-    console.log('SUCCESS!', response);
-    nextScreen();
-  })
-  .catch((error) => {
-    console.error('FAILED...', error);
+      📅 Date & Time:
+      ${date} at ${time}
 
-    alert(`
-      Email failed to send.
-      Check console logs.
-    `);
-  });
-}
+      ✨ Selected Activity:
+      ${choice}
+      `
+      })
+
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log("SUCCESS", data);
+      launchConfetti();
+      nextScreen();
+    })
+    .catch(error => {
+      console.error("ERROR", error);
+      alert("Something went wrong sending the plans 💔");
+    });
+  }
+
+
+
 
   function launchConfetti() {
     for(let i = 0; i < 80; i++) {
